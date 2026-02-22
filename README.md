@@ -1,0 +1,7 @@
+- Tronscan is a bit buggy.
+- This is a small repo for quick testing of a Tron signing device. Mostly vibe coded. Do not use for anything serious.
+- Clone the repo. Move into it. Install `node` and `npm`. Install tronweb as `npm i tronweb`. That should be all to get you going.
+- Bunch of assist scripts:
+  - `address_codec` ..
+  - `hex_to_ascii`
+- 

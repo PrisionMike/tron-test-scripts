@@ -1,0 +1,25 @@
+{
+  "txID": "4dffd7c6f285e6b7d5ae0ea6bb81746eed00a4274ef11c8d11febd3d2128ff69",
+  "raw_data": {
+    "data": "6f6674656e2063616c6c65642061732061206e6f7465",
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "amount": 1000000000,
+            "owner_address": "41f2cd810c48c401d392ead3c6e1e1cb9f57750a58",
+            "to_address": "41f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f"
+          },
+          "type_url": "type.googleapis.com/protocol.TransferContract"
+        },
+        "type": "TransferContract"
+      }
+    ],
+    "ref_block_bytes": "bdbb",
+    "ref_block_hash": "407e890edf2406e3",
+    "expiration": 1771793907000,
+    "timestamp": 1771792647000
+  },
+  "raw_data_hex": "0a02bdbb2208407e890edf2406e340b8fa95b9c83352166f6674656e2063616c6c65642061732061206e6f74655a69080112650a2d747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e5472616e73666572436f6e747261637412340a1541f2cd810c48c401d392ead3c6e1e1cb9f57750a58121541f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f188094ebdc0370d886c9b8c833",
+  "visible": false
+}

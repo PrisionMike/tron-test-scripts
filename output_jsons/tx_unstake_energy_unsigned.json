@@ -1,0 +1,24 @@
+{
+  "txID": "48600cf59725a757bc75c14bfaead17c2fef059c3bd07abfb3ad94f3bf093e2d",
+  "raw_data": {
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "resource": "ENERGY",
+            "owner_address": "41f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f",
+            "unfreeze_balance": 20000000
+          },
+          "type_url": "type.googleapis.com/protocol.UnfreezeBalanceV2Contract"
+        },
+        "type": "UnfreezeBalanceV2Contract"
+      }
+    ],
+    "ref_block_bytes": "b629",
+    "ref_block_hash": "2ded5904a432bbe9",
+    "expiration": 1771788039000,
+    "timestamp": 1771786779000
+  },
+  "raw_data_hex": "0a02b62922082ded5904a432bbe940d8e6afb6c8335a5c083712580a36747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e556e667265657a6542616c616e63655632436f6e7472616374121e0a1541f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f1080dac409180170f8f2e2b5c833",
+  "visible": false
+}
