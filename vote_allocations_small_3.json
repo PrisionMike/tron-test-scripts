@@ -1,0 +1,16 @@
+{
+  "votes": [
+    {
+      "candidate": "41f16412b9a17ee9408646e2a21e16478f72ed1e95",
+      "allocation": 696969695
+    },
+    {
+      "candidate": "41f279598aff304907ca03b0498c686d010d3d80bb",
+      "allocation": 999999999
+    },
+    {
+      "candidate": "41cf9e12e0f48573c84bc88d8ff7c50567485aaa24",
+      "allocation": 123456789
+    }
+  ]
+}

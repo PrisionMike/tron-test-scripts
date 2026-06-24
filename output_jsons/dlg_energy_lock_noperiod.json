@@ -1,0 +1,29 @@
+{
+  "txID": "ae086284fcf5a0804a16b1ceb93854131d61625711c8103c165dd6161c87df79",
+  "raw_data": {
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "balance": 1000000,
+            "resource": "ENERGY",
+            "receiver_address": "TYMrNwKzoU8cu3FZEsgp3WLSxTBuCTEH5J",
+            "lock": true,
+            "owner_address": "TY72iA3SBtrds3QLYsS7LwYfkzXwAXCRWT"
+          },
+          "type_url": "type.googleapis.com/protocol.DelegateResourceContract"
+        },
+        "type": "DelegateResourceContract"
+      }
+    ],
+    "ref_block_bytes": "66dc",
+    "ref_block_hash": "40a28761f7a58e87",
+    "expiration": 1781261568000,
+    "timestamp": 1781257908318
+  },
+  "raw_data_hex": "0a0266dc220840a28761f7a58e87408090dadbeb335a730839126f0a35747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e44656c65676174655265736f75726365436f6e747261637412360a1541f2cd810c48c401d392ead3c6e1e1cb9f57750a58100118c0843d221541f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f280170dee0fad9eb33",
+  "visible": true,
+  "signature": [
+    "cccf95c086ad78f9573eb39ab0abdff130f845b93fdd7766066568422bfc433e5ecf29c33f4c0e458e766b88edb8138dd4a5a2635d0e7d4e5ceed0e8607388081C"
+  ]
+}

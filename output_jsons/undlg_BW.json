@@ -1,0 +1,27 @@
+{
+  "txID": "690ace4bea2eb210140fc95be26ef09b6d9df4d4cc9a631919acba0b8a29a5fb",
+  "raw_data": {
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "balance": 1000000,
+            "receiver_address": "TYMrNwKzoU8cu3FZEsgp3WLSxTBuCTEH5J",
+            "owner_address": "TY72iA3SBtrds3QLYsS7LwYfkzXwAXCRWT"
+          },
+          "type_url": "type.googleapis.com/protocol.UnDelegateResourceContract"
+        },
+        "type": "UnDelegateResourceContract"
+      }
+    ],
+    "ref_block_bytes": "f37d",
+    "ref_block_hash": "96f8f7fefcf225a1",
+    "expiration": 1781169669000,
+    "timestamp": 1781168410623
+  },
+  "raw_data_hex": "0a02f37d220896f8f7fefcf225a1408887f1afeb335a71083a126d0a37747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e556e44656c65676174655265736f75726365436f6e747261637412320a1541f2cd810c48c401d392ead3c6e1e1cb9f57750a5818c0843d221541f59b1e8c74ed1a925eef999c9f6f2dac11c11a9f70ff9fa4afeb33",
+  "visible": true,
+  "signature": [
+    "c53e9f67de5b57834e22603934ca3d35a15d0186e37e761c59163c66fccfa74f1dba4129f6f0ca4a6aedf963cb50031569d9d044bf4eab7cc3507f5461b1f7e71C"
+  ]
+}

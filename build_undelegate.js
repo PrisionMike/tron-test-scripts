@@ -75,7 +75,7 @@ function parseSunArg(args) {
   const MAX_I64 = 9223372036854775807n;
   if (sun > MAX_I64) die('--sun exceeds int64 max (2^63-1)');
 
-  return sun.toString(10);
+  return sun.toString(10); // canonical decimal string
 }
 
 function resolveOwnerAddress(args, tronWeb, derivedOwnerAddress) {
@@ -92,13 +92,24 @@ function resolveOwnerAddress(args, tronWeb, derivedOwnerAddress) {
   return ownerAddress;
 }
 
+function resolveReceiverAddress(args, tronWeb) {
+  const receiver =
+    args.receiver || args.receiveraddress || args.receiverAddress || process.env.TRON_DEFAULT_RECEIVER;
+  if (!receiver || typeof receiver !== 'string') {
+    die('--receiver is required (or set TRON_DEFAULT_RECEIVER in .env)');
+  }
+  if (!tronWeb.isAddress(receiver)) die('receiver is not a valid TRON base58 address');
+  return receiver;
+}
+
 async function main() {
   loadDotEnv();
   const args = parseArgs(process.argv);
 
   const amountSun = parseSunArg(args);
   const resource = normalizeResource(args.reason);
-  const outFile = args.out || './output_jsons/tx_stake.json';
+  const memo = typeof args.memo === 'string' ? args.memo : '';
+  const outFile = args.out || './output_jsons/tx_undelegate.json';
   const shouldSign = Boolean(args.sign);
   const shouldBroadcast = Boolean(args.broadcast);
   if (shouldBroadcast && !shouldSign) die('--broadcast requires --sign');
@@ -119,25 +130,46 @@ async function main() {
   }
 
   const ownerAddress = resolveOwnerAddress(args, tronWeb, derivedOwnerAddress);
+  const receiverAddress = resolveReceiverAddress(args, tronWeb);
+  if (receiverAddress === ownerAddress) die('--receiver must not be the same as the owner address');
 
   console.log(`Owner:      ${ownerAddress}`);
+  console.log(`Receiver:   ${receiverAddress}`);
   console.log(`Amount:     ${amountSun} SUN`);
   console.log(`Reason:     ${resource}`);
+  console.log(`Memo:       ${memo}`);
   console.log(`Sign:       ${shouldSign ? 'YES' : 'NO'}`);
   console.log(`Broadcast:  ${shouldBroadcast ? 'YES' : 'NO'}`);
   console.log(`Node:       ${fullNode}`);
   console.log(`Output:     ${outFile}`);
 
-  console.log(`Building transaction... amountSun: ${amountSun}`);
-  const unsignedTx = await tronWeb.transactionBuilder.freezeBalanceV2(
-    amountSun,
+  // Build the unsigned tx directly against the node's HTTP endpoint instead of
+  // tronWeb.transactionBuilder.undelegateResource(), to stay symmetric with the
+  // delegate script and skip client-side validation. The UnDelegateResource
+  // contract has no lock / lock_period fields.
+  const payload = {
+    owner_address: ownerAddress,
+    receiver_address: receiverAddress,
+    balance: Number(amountSun),
     resource,
-    ownerAddress
-  );
+    visible: true,
+  };
+
+  console.log(`Building transaction... amountSun: ${amountSun}`);
+  const unsignedTx = await tronWeb.fullNode.request('/wallet/undelegateresource', payload, 'post');
+  if (!unsignedTx || unsignedTx.Error || !unsignedTx.txID) {
+    die(`Node rejected undelegateresource build: ${JSON.stringify(unsignedTx)}`);
+  }
 
   let txToWrite = await tronWeb.transactionBuilder.extendExpiration(
     unsignedTx,
-    60 * 60
+    20 * 60
+  );
+
+  txToWrite = await tronWeb.transactionBuilder.addUpdateData(
+    txToWrite,
+    memo,
+    'utf8'
   );
 
   if (shouldSign) {

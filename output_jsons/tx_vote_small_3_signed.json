@@ -1,0 +1,39 @@
+{
+  "txID": "9051386654d67ecaade275d6b0a68a752ce4fc648adf49272d85eb5cb063025e",
+  "raw_data": {
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "owner_address": "41f2cd810c48c401d392ead3c6e1e1cb9f57750a58",
+            "votes": [
+              {
+                "vote_address": "41f16412b9a17ee9408646e2a21e16478f72ed1e95",
+                "vote_count": 696969695
+              },
+              {
+                "vote_address": "41f279598aff304907ca03b0498c686d010d3d80bb",
+                "vote_count": 999999999
+              },
+              {
+                "vote_address": "41cf9e12e0f48573c84bc88d8ff7c50567485aaa24",
+                "vote_count": 123456789
+              }
+            ]
+          },
+          "type_url": "type.googleapis.com/protocol.VoteWitnessContract"
+        },
+        "type": "VoteWitnessContract"
+      }
+    ],
+    "ref_block_bytes": "3f04",
+    "ref_block_hash": "6a959043e2afe83e",
+    "expiration": 1772092800000,
+    "timestamp": 1772091540000
+  },
+  "raw_data_hex": "0a023f0422086a959043e2afe83e4080f8d8c7c9335aac01080412a7010a30747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e566f74655769746e657373436f6e747261637412730a1541f2cd810c48c401d392ead3c6e1e1cb9f57750a58121d0a1541f16412b9a17ee9408646e2a21e16478f72ed1e9510dfd3abcc02121d0a1541f279598aff304907ca03b0498c686d010d3d80bb10ff93ebdc03121c0a1541cf9e12e0f48573c84bc88d8ff7c50567485aaa2410959aef3a70a0848cc7c933",
+  "visible": false,
+  "signature": [
+    "1084eb4b792e22c2bc6f2021b02d680535b3c5f2dd028c3f2125c542c78a866e45e187ae4fbe84bfcf71ef9771a5b232b65c357dbd057ebb5e13d3a3ff9f51581C"
+  ]
+}

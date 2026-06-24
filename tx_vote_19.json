@@ -1,0 +1,103 @@
+{
+  "txID": "6b7954a8df4ad21038f4626388488573d2bc484aa7514e1bc166cac54b06fad1",
+  "raw_data": {
+    "contract": [
+      {
+        "parameter": {
+          "value": {
+            "owner_address": "41f2cd810c48c401d392ead3c6e1e1cb9f57750a58",
+            "votes": [
+              {
+                "vote_address": "41f16412b9a17ee9408646e2a21e16478f72ed1e95",
+                "vote_count": 927694161
+              },
+              {
+                "vote_address": "41f279598aff304907ca03b0498c686d010d3d80bb",
+                "vote_count": 224027934
+              },
+              {
+                "vote_address": "41cf9e12e0f48573c84bc88d8ff7c50567485aaa24",
+                "vote_count": 407570369
+              },
+              {
+                "vote_address": "41e76da262ad1ca05274f74258ee18bc7fcc4987dc",
+                "vote_count": 795932355
+              },
+              {
+                "vote_address": "41e61626ef01662b320a8ba38372e9db9cca940a3b",
+                "vote_count": 950222748
+              },
+              {
+                "vote_address": "41290bf92b578a1c615ebb273aff6a285230c02f65",
+                "vote_count": 432424768
+              },
+              {
+                "vote_address": "41e71c365c9dbf284ca8c1eed2d7877638941b9011",
+                "vote_count": 838056426
+              },
+              {
+                "vote_address": "41977f82c69011cf4a7db6f7339edcded85c614d45",
+                "vote_count": 788915117
+              },
+              {
+                "vote_address": "41cd8d8ad1b4a5bd7afe46949421d2b411a3601717",
+                "vote_count": 994923321
+              },
+              {
+                "vote_address": "410257b56399ef8d835b42f68e6476f7fe8ca2d283",
+                "vote_count": 548843030
+              },
+              {
+                "vote_address": "416d93bd35508007a45a1c7cdb8b982e70bf391775",
+                "vote_count": 730898925
+              },
+              {
+                "vote_address": "41e817b29047a50558cc8f5e97c5bb99d4723cbaa2",
+                "vote_count": 246966267
+              },
+              {
+                "vote_address": "41b40de3abd90961539517d57d0f79f477072ebda0",
+                "vote_count": 635447348
+              },
+              {
+                "vote_address": "41d0668c49826f2ca13e3848b5eb3414fb059b7cc0",
+                "vote_count": 595122613
+              },
+              {
+                "vote_address": "41711cf6683d28621ae12030fd541b288c61d682cd",
+                "vote_count": 412719961
+              },
+              {
+                "vote_address": "418d4ee1aa3e5f06533c277c3d8f19590e06be4da5",
+                "vote_count": 605519190
+              },
+              {
+                "vote_address": "41d42e593de3cee8156934cc2182ef4d107e9291f0",
+                "vote_count": 961159160
+              },
+              {
+                "vote_address": "415f48f0886e85e469f592efdd7697b4c6fe88addc",
+                "vote_count": 150594450
+              },
+              {
+                "vote_address": "410102255809ed8d2139c533b8ebfda9131a9bbbc8",
+                "vote_count": 410105809
+              }
+            ]
+          },
+          "type_url": "type.googleapis.com/protocol.VoteWitnessContract"
+        },
+        "type": "VoteWitnessContract"
+      }
+    ],
+    "ref_block_bytes": "4127",
+    "ref_block_hash": "224c58be4fc3f454",
+    "expiration": 1772094453000,
+    "timestamp": 1772093193000
+  },
+  "raw_data_hex": "0a0241272208224c58be4fc3f4544088eabdc8c9335a9b0508041296050a30747970652e676f6f676c65617069732e636f6d2f70726f746f636f6c2e566f74655769746e657373436f6e747261637412e1040a1541f2cd810c48c401d392ead3c6e1e1cb9f57750a58121d0a1541f16412b9a17ee9408646e2a21e16478f72ed1e9510d1faadba03121c0a1541f279598aff304907ca03b0498c686d010d3d80bb109ecae96a121d0a1541cf9e12e0f48573c84bc88d8ff7c50567485aaa2410c18facc201121d0a1541e76da262ad1ca05274f74258ee18bc7fcc4987dc10c3edc3fb02121d0a1541e61626ef01662b320a8ba38372e9db9cca940a3b109cff8cc503121d0a1541290bf92b578a1c615ebb273aff6a285230c02f6510c08e99ce01121d0a1541e71c365c9dbf284ca8c1eed2d7877638941b901110eaf3ce8f03121d0a1541977f82c69011cf4a7db6f7339edcded85c614d4510adc797f802121d0a1541cd8d8ad1b4a5bd7afe46949421d2b411a360171710b9a6b5da03121d0a15410257b56399ef8d835b42f68e6476f7fe8ca2d2831096dcda8502121d0a15416d93bd35508007a45a1c7cdb8b982e70bf39177510edc3c2dc02121c0a1541e817b29047a50558cc8f5e97c5bb99d4723cbaa210fbcfe175121d0a1541b40de3abd90961539517d57d0f79f477072ebda010b4d080af02121d0a1541d0668c49826f2ca13e3848b5eb3414fb059b7cc010b5b3e39b02121d0a1541711cf6683d28621ae12030fd541b288c61d682cd10d9b6e6c401121d0a15418d4ee1aa3e5f06533c277c3d8f19590e06be4da510d6fadda002121d0a1541d42e593de3cee8156934cc2182ef4d107e9291f010f8bfa8ca03121c0a15415f48f0886e85e469f592efdd7697b4c6fe88addc1092c7e747121d0a15410102255809ed8d2139c533b8ebfda9131a9bbbc810d1efc6c30170a8f6f0c7c933",
+  "visible": false,
+  "signature": [
+    "9d1b352488527ae2817b539df1410e64edeb3a6a4ca417ceb6af6958aca499406f1713ab625fba17545b48d2b779c0b205f37960f286af76aa9ca9bb8ea7a2ac1C"
+  ]
+}

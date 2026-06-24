@@ -75,7 +75,7 @@ function parseSunArg(args) {
   const MAX_I64 = 9223372036854775807n;
   if (sun > MAX_I64) die('--sun exceeds int64 max (2^63-1)');
 
-  return sun.toString(10);
+  return sun.toString(10); // canonical decimal string
 }
 
 function resolveOwnerAddress(args, tronWeb, derivedOwnerAddress) {
@@ -92,13 +92,50 @@ function resolveOwnerAddress(args, tronWeb, derivedOwnerAddress) {
   return ownerAddress;
 }
 
+function resolveReceiverAddress(args, tronWeb) {
+  const receiver =
+    args.receiver || args.receiveraddress || args.receiverAddress || process.env.TRON_DEFAULT_RECEIVER;
+  if (!receiver || typeof receiver !== 'string') {
+    die('--receiver is required (or set TRON_DEFAULT_RECEIVER in .env)');
+  }
+  if (!tronWeb.isAddress(receiver)) die('receiver is not a valid TRON base58 address');
+  return receiver;
+}
+
+// Returns { lock, lockPeriod } where either may be undefined when the flag was
+// not provided. We deliberately decouple the two so --lockperiod can be sent
+// even when --lock is false, which TronWeb's builder refuses to do.
+function parseLockArgs(args) {
+  let lock; // undefined => omit from payload
+  if ('lock' in args) {
+    const raw = args.lock;
+    if (raw === true || raw === 'true' || raw === '1') lock = true;
+    else if (raw === 'false' || raw === '0') lock = false;
+    else die('--lock must be true/false (or 1/0)');
+  }
+
+  let lockPeriod; // undefined => omit from payload
+  const lpRaw = args.lockperiod ?? args['lock-period'] ?? args.lockPeriod;
+  if (lpRaw !== undefined) {
+    if (typeof lpRaw !== 'string' || !/^\d+$/.test(lpRaw)) die('--lockperiod must be a non-negative integer (in blocks)');
+    const lp = BigInt(lpRaw);
+    const MAX_I64 = 9223372036854775807n;
+    if (lp > MAX_I64) die('--lockperiod exceeds int64 max (2^63-1)');
+    lockPeriod = Number(lp);
+  }
+
+  return { lock, lockPeriod };
+}
+
 async function main() {
   loadDotEnv();
   const args = parseArgs(process.argv);
 
   const amountSun = parseSunArg(args);
   const resource = normalizeResource(args.reason);
-  const outFile = args.out || './output_jsons/tx_stake.json';
+  const { lock, lockPeriod } = parseLockArgs(args);
+  const memo = typeof args.memo === 'string' ? args.memo : '';
+  const outFile = args.out || './output_jsons/tx_delegate.json';
   const shouldSign = Boolean(args.sign);
   const shouldBroadcast = Boolean(args.broadcast);
   if (shouldBroadcast && !shouldSign) die('--broadcast requires --sign');
@@ -119,25 +156,50 @@ async function main() {
   }
 
   const ownerAddress = resolveOwnerAddress(args, tronWeb, derivedOwnerAddress);
+  const receiverAddress = resolveReceiverAddress(args, tronWeb);
+  if (receiverAddress === ownerAddress) die('--receiver must not be the same as the owner address');
 
-  console.log(`Owner:      ${ownerAddress}`);
-  console.log(`Amount:     ${amountSun} SUN`);
-  console.log(`Reason:     ${resource}`);
-  console.log(`Sign:       ${shouldSign ? 'YES' : 'NO'}`);
-  console.log(`Broadcast:  ${shouldBroadcast ? 'YES' : 'NO'}`);
-  console.log(`Node:       ${fullNode}`);
-  console.log(`Output:     ${outFile}`);
+  console.log(`Owner:       ${ownerAddress}`);
+  console.log(`Receiver:    ${receiverAddress}`);
+  console.log(`Amount:      ${amountSun} SUN`);
+  console.log(`Reason:      ${resource}`);
+  console.log(`Lock:        ${lock === undefined ? '(omitted)' : lock}`);
+  console.log(`Lock period: ${lockPeriod === undefined ? '(omitted)' : `${lockPeriod} blocks`}`);
+  console.log(`Memo:        ${memo}`);
+  console.log(`Sign:        ${shouldSign ? 'YES' : 'NO'}`);
+  console.log(`Broadcast:   ${shouldBroadcast ? 'YES' : 'NO'}`);
+  console.log(`Node:        ${fullNode}`);
+  console.log(`Output:      ${outFile}`);
+
+  // Build the unsigned tx directly against the node's HTTP endpoint instead of
+  // tronWeb.transactionBuilder.delegateResource(). This bypasses the client-side
+  // validation that only emits `lock_period` when `lock` is truthy, letting us
+  // set `lock` and `lock_period` independently.
+  const payload = {
+    owner_address: ownerAddress,
+    receiver_address: receiverAddress,
+    balance: Number(amountSun),
+    resource,
+    visible: true,
+  };
+  if (lock !== undefined) payload.lock = lock;
+  if (lockPeriod !== undefined) payload.lock_period = lockPeriod;
 
   console.log(`Building transaction... amountSun: ${amountSun}`);
-  const unsignedTx = await tronWeb.transactionBuilder.freezeBalanceV2(
-    amountSun,
-    resource,
-    ownerAddress
-  );
+  const unsignedTx = await tronWeb.fullNode.request('/wallet/delegateresource', payload, 'post');
+  if (!unsignedTx || unsignedTx.Error || !unsignedTx.txID) {
+    die(`Node rejected delegateresource build: ${JSON.stringify(unsignedTx)}`);
+  }
 
   let txToWrite = await tronWeb.transactionBuilder.extendExpiration(
     unsignedTx,
     60 * 60
+  );
+
+  txToWrite = await tronWeb.transactionBuilder.addUpdateData(
+    txToWrite,
+    memo,
+    'utf8'
   );
 
   if (shouldSign) {

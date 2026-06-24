@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-02-26T08:59:21.588Z",
+  "fullNode": "https://api.trongrid.io",
+  "latestBlock": 80476716,
+  "startBlock": 80476716,
+  "endBlock": 80458979,
+  "targetVoteTransactions": 1000,
+  "analyzedVoteTransactions": 1000,
+  "blocksScanned": 17738,
+  "totalTransactionsSeen": 5484829,
+  "distribution": {
+    "1": 578,
+    "2": 36,
+    "3": 318,
+    "4": 17,
+    "5": 23,
+    "6": 5,
+    "7": 5,
+    "9": 2,
+    "10": 13,
+    "11": 1,
+    "24": 2
+  }
+}
